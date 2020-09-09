@@ -1,0 +1,24 @@
+version: '2'
+services:
+  techchallengeapp:
+   restart: always
+   image: techchallengeapp:0.7
+   ports:
+    - "0.0.0.0:3000:3000"
+   links:
+    -  postgres
+  postgres:
+   restart: always
+   image: postgres:9.6
+   environment:
+    - DbUser=postgres
+    - DbPassword=changeme
+    - DbName=app
+    - POSTGRES_PASSWORD=password  
+   ports:
+    - "0.0.0:5432:5432"       
+            
+networks:
+  default:
+    external:
+      name: test-nw
